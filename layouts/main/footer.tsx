@@ -1,39 +1,11 @@
-"use client"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter,faYoutube,faInstagram } from "@fortawesome/free-brands-svg-icons"
-import { faLocationArrow, faPhone, faClock, faEnvelope, faChevronUp } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useState } from 'react'
+import { faLocationArrow, faPhone, faClock, faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Footer = () => {
 
-  
-    const [visible, setVisible] = useState(false)
-    
-    const toggleVisible = () => {
-      const scrolled = document.documentElement.scrollTop;
-      if (scrolled > 300){
-        setVisible(true)
-      } 
-      else if (scrolled <= 300){
-        setVisible(false)
-      }
-    };
-    
-    const scrollToTop = () =>{
-      window.scrollTo({
-        top: 0, 
-        behavior: 'smooth'
-      });
-    };
-
-
-  useEffect( () => {
-    window.addEventListener('scroll', toggleVisible);
-    return window.removeEventListener('scroll', toggleVisible);
-  }, [])
   
   return (
     <div className="footer-wrapper bg-footer-background text-center  pt-[96px] pb-[24px] px-0 relative z-[1] md:pt-[120px] md:pb-[48px]">
@@ -46,7 +18,7 @@ const Footer = () => {
                   <div className="footer-widgets flex-[0_0_100%] max-w-full relative w-full px-[15px] md:flex-[0_0_50%] md:max-w-[50%]  lg:basis-0 lg:grow min-w-0">
                     <div className=" widget_media_image mb-[48px] ">
                       <div className="widget-content">
-                        <Image className='mx-auto md:mx-0' width={63} height={56} src="/assets/images/logo/Logo_light1.svg"  alt=""  style={{maxWidth: '100%', height: 'auto'}}  />
+                        <Image className='mx-auto md:mx-0 w-auto h-auto' width={63} height={56} src="/assets/images/logo/Logo_light1.svg"  alt=""  style={{maxWidth: '100%', height: 'auto'}}  />
                       </div>
                     </div>
                     <div className="widget_text mb-[48px]">
@@ -201,11 +173,7 @@ const Footer = () => {
         </Link>. © Burgos - Street Food WordPress Theme
       </div>
     </div>
-    <div onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}} className="to-the-top text-right flex-[0_0_100%] max-w-full relative w-full px-[15px]">
-      <div id="toTopBtn" className="button-top font-black inline-block leading-[1] fixed z-[1000] bottom-6 right-6 pt-[13px] text-center opacity-[0.7] rounded-[500px] bg-hero-pattern hover:opacity-[1] cursor-pointer text-white w-12 h-12 text-xl transition-all duration-[0.3s] ease-[ease]" >
-                <FontAwesomeIcon  icon={faChevronUp}/>
-      </div>
-    </div>
+    
   </div>
 </footer>
 </div>
