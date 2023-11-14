@@ -1,8 +1,9 @@
 "use client"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter,faYoutube,faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { faLocationArrow, faPhone, faClock, faEnvelope, faChevronUp } from "@fortawesome/free-solid-svg-icons"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -27,7 +28,13 @@ const Footer = () => {
         behavior: 'smooth'
       });
     };
-  window.addEventListener('scroll', toggleVisible);
+
+
+  useEffect( () => {
+    window.addEventListener('scroll', toggleVisible);
+    return window.removeEventListener('scroll', toggleVisible);
+  }, [])
+  
   return (
     <div className="footer-wrapper bg-footer-background text-center  pt-[96px] pb-[24px] px-0 relative z-[1] md:pt-[120px] md:pb-[48px]">
       <div className="footer">
