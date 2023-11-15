@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/utils/formatCurrency";
-// import { useShoppingCart } from "@/context/ShopingCartContext"
+import { useShoppingCart } from "@/context/ShoppingCartContext"
 import { useRouter } from 'next/navigation';
 import {motion} from "framer-motion"
 import Image from "next/image";
@@ -16,7 +16,7 @@ type ProductItemProps= {
 }
 
 const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) => {
-  // const { increaseCartQuantity} = useShoppingCart()
+  const { increaseCartQuantity} = useShoppingCart()
   const router = useRouter()
   return (
     <>
@@ -25,7 +25,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
             whileInView={{ opacity: 1}}
             viewport={{ once: true }}
               transition={{duration:0.5, delay:0.25}}
-           onClick={()=>router.push(`/products/${id}`)} className="block mb-5 animate__animated animate__fadeIn">
+           onClick={()=>router.push(`/products/${id}`)} className="group block mb-5 animate__animated animate__fadeIn">
              <div className="product-image mb-[18px] overflow-hidden relative">
                <span style={{display: sale ? "block" : "none"}} className={`absolute z-[1] right-auto left-0  md:left-auto top-[15px] ml-5 md:ml-0 bg-orange text-white md:inline-block md:mb-0 py-[5px] px-[11px] text-[14px] leading-[18px] font-semibold rounded-[14px] md:right-5`}>
                  {sale ?"  Sale!" :null}
@@ -35,9 +35,10 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
                  width={500}
                  height={500}
                  alt=""
+                 className="group-hover:scale-110 group-hover:transition-all transition-all"
                />
              </div>
-             <div className="relative star-rating w-[129px] h-5 tracking-[10px] mx-auto text-md overflow-hidden text-yellow ">
+             <div className=" relative star-rating w-[129px] h-5 tracking-[10px] mx-auto text-md overflow-hidden text-yellow ">
                <i className="">
                  <FontAwesomeIcon icon={faStar} />
                </i>
@@ -54,7 +55,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
                  <FontAwesomeIcon icon={faStar} />
                </i>
              </div>
-             <h2 className="mt-3 mb-[5px] text-lg leading-[1.6] font-extrabold">
+             <h2 className="mt-3 mb-[5px] text-lg leading-[1.6] font-extrabold group-hover:text-orange group-hover:transition-all transition-all">
                {name}
              </h2>
              
@@ -80,7 +81,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
            </motion.a>
            <button
              className="custom-button1 pl-[30px] pr-[30px] py-[13px] animate__animated animate__fadeIn"
-            //  onClick={()=> increaseCartQuantity(id)}
+             onClick={()=> increaseCartQuantity(id)}
            >
              Add to cart
            </button>

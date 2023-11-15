@@ -17,8 +17,8 @@ const Header = () => {
       <div className='py-6 flex-max-w relative-padding  '>
         <nav className="relative float-left pt-[15px] right-0 w-full pl-0 z-[5] flex items-center justify-between flex-wrap px-0 lg:flex-row lg:flex-nowrap lg:justify-start">
             <Link href="/" className="ml-[-2px] my-0 mx-3 py-[5px] text-sm whitespace-nowrap">
-              <Image priority width={200} height={30} src="/assets/images/logo/Logo_light.svg" className={` ${pathname=== "/" ?"w-auto h-auto max-w-[150px] min-w-[200px] p-0" :"hidden"}`} alt="" />
-              <Image priority width={200} height={50} src="/assets/images/logo/Logo2.svg" className={` ${pathname=== "/" ?"hidden" :"w-auto h-auto  max-w-[150px] min-w-[200px] p-0"}`} alt="" />
+              <Image priority width={200} height={30} src="/assets/images/logo/Logo_light.svg" className={` ${pathname=== "/" ?" max-w-[150px] min-w-[200px] p-0" :"hidden"}`} alt="" />
+              <Image priority width={200} height={50} src="/assets/images/logo/Logo2.svg" className={` ${pathname=== "/" ?"hidden" :"  max-w-[150px] min-w-[200px] p-0"}`} alt="" />
             </Link>
             <button data-collapse-toggle="nav-toggle " id="nav-toggle" className={`inline-block absolute z-[2] right-0 top-0 pr-0 outline-none pt-6 cursor-pointer lg:hidden ${isToggle ? "open" : ""}`  }  onClick={() => toggleMenu()}>
               <span></span>

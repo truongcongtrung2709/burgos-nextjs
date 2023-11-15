@@ -2,17 +2,20 @@
 import ProductItem from "./home-product-item";
 import {motion} from "framer-motion"
 import { Product } from "@/types/product";
-import useSWR from 'swr'
+import { getProducts,productsURLEndpoint as cacheKey } from "@/services/productsAPI";
+import useSWR,{preload} from 'swr'
+preload(cacheKey,getProducts)
 const Products = () => {
-  const fetcher = (url:string)=> fetch(url).then(res=>res.json());
 
-  const { data, error, isLoading } = useSWR('https://burgos-be.onrender.com/products', fetcher,{revalidateIfStale: false,
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false})
 
-  if (error) return <div>failed to load</div>
-
-  if (isLoading) return <div>loading...</div>
+const{data:products, isLoading, error} = useSWR(cacheKey,getProducts, 
+  {revalidateIfStale:false, revalidateOnFocus:false,revalidateOnReconnect:false})
+if(isLoading) {
+  return <div className="text-center">...Loading</div>
+}
+if(error){
+  return <div className="text-center">false to get data</div>
+}
 
   return (
     <section className="our-products mb-[24px] xl:mb-[55px]">
@@ -26,7 +29,7 @@ const Products = () => {
       </motion.h1>
       <div className="elemental-container">
         <div className="product-list mt-0 mb-6 xl:mb-[55px] grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-y-[48px] gap-x-5">
-        {data?.map((burger:Product) => (
+        {products?.map((burger:Product) => (
            <div key={burger.id} className="product-item  text-center">
            <ProductItem {...burger}/>
          </div>    

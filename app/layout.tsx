@@ -1,13 +1,14 @@
+'use client'
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
+import ScrollOnTop from '@/components/scroll-on-top/scroll-on-top';
+
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'Burgos',
-  description: 'The place for burgers.',
-}
 
 export default function RootLayout({
   children,
@@ -16,7 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ShoppingCartProvider>
+
+          {children}
+          <ScrollOnTop/>
+          
+        </ShoppingCartProvider>
+        </body>
     </html>
   )
 }

@@ -1,24 +1,29 @@
-"use client"
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useShoppingCart } from '@/context/ShopingCartContext';
-import useSWR from 'swr'
-import CartItem from './shoping-cart-item';
+import { useShoppingCart } from '@/context/ShoppingCartContext';
+import CartItem from './shopping-cart-item';
 import { formatCurrency } from '@/utils/formatCurrency';
-import { useEffect, useState } from 'react';
 import { Product } from '@/types/product';
 import Link from 'next/link';
+import useSWR,{preload} from 'swr'
+import { getProducts,productsURLEndpoint as cacheKey } from "@/services/productsAPI";
 type ShopingCartProps={
   isOpen?: boolean
 }
-
-const ShopingCart = ({isOpen} : ShopingCartProps) => {
+preload(cacheKey,getProducts)
+const ShoppingCart = ({isOpen} : ShopingCartProps) => {
   
   const {closeCart,openCart, cartQuantity, cartItems}= useShoppingCart();
-  const fetcher = (url:string)=> fetch(url).then(res=>res.json());
-  const { data, error, isLoading } = useSWR('https://burgos-be.onrender.com/products', fetcher)
-  if (error) return <div>failed to load</div>
-  if (isLoading) return <div>loading...</div>
+
+    const{data:products, isLoading, error} = useSWR(cacheKey,getProducts, 
+      {revalidateIfStale:false, revalidateOnFocus:false,revalidateOnReconnect:false})
+    if(isLoading) {
+      return <div className="text-center">...Loading</div>
+    }
+    if(error){
+      return <div className="text-center">false to get data</div>
+    }
+    
   return (
     <div className="shopping_cartwrapper">
         <div onClick={openCart} className={`shopping-cart flex z-[2] fixed cursor-pointer rounded-[50%] left-[4%] bottom-[1%]`} >
@@ -34,14 +39,14 @@ const ShopingCart = ({isOpen} : ShopingCartProps) => {
         <div className="car_count_title">
         <ul className=" cart_list_widget h-[calc(100vh_-_150px)] overflow-y-auto text-black m-0 p-2.5 text-left py-6 leading-6 text-[15px]">
           {cartItems.map(item=>(
-            <CartItem key={item.id} {...item}/>
+            <CartItem key={item.id} {...item} products={products}/>
           ))}
         
       </ul>
       <div className="wcf-min-bottom-part w-full absolute mt-[10%] bottom-0 bg-[#ddd]">
         <p className="sub_total_cat text-lg font-extrabold mb-0 font-nunito mt-[5%] text-[#000] pt-[10px] m-0">Sub Total:{" "}{formatCurrency(cartItems.reduce((total, cartItem) =>{
 
-          const item = data?.find((i:Product) => i.id === cartItem.id)
+          const item = products?.find((i:Product) => i.id === cartItem.id)
           
           return total + (item?.price||0) * cartItem.quantity
         },0)
@@ -62,4 +67,4 @@ const ShopingCart = ({isOpen} : ShopingCartProps) => {
   )
 }
 
-export default ShopingCart
+export default ShoppingCart
