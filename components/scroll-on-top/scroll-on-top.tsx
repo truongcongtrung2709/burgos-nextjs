@@ -27,7 +27,7 @@ export default function ScrollOnTop(){
 
   return (
     <div
-    onClick={scrollToTop}  className="to-the-top text-right flex-[0_0_100%] max-w-full relative w-full px-[15px]" style={{display: visible ? 'inline' : 'none'}}>
+    onClick={scrollToTop}  className="to-the-top text-right flex-[0_0_100%] max-w-full relative w-full px-[15px]" style={{display: visible ? 'block' : 'none'}}>
       <div id="toTopBtn"  className="button-top font-black inline-block leading-[1] fixed z-[1000] bottom-6 right-6 pt-[13px] text-center opacity-[0.7] rounded-[500px] bg-hero-pattern hover:opacity-[1] cursor-pointer text-white w-12 h-12 text-xl transition-all duration-[0.3s] ease-[ease]" >
                 <FontAwesomeIcon  icon={faChevronUp}/>
       </div>

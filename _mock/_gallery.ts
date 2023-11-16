@@ -30,3 +30,35 @@ export const _homeGallery =[
     image: "/assets/images/album6.webp"
   },
 ]
+export const _aboutGallery =[
+  {
+    id:1,
+    title: "Cutlet",
+    image: "/assets/images/gal1.webp"
+  },
+  {
+    id:2,
+    title: "Buritos",
+    image: "/assets/images/gal2.webp"
+  },
+  {
+    id:3,
+    title: "Ingredients",
+    image: "/assets/images/gal3.webp"
+  },
+  {
+    id:4,
+    title: "Fast Food",
+    image: "/assets/images/gal4.webp"
+  },
+  {
+    id:5,
+    title: "Fast Food",
+    image: "/assets/images/gal5.webp"
+  },
+  {
+    id:6,
+    title: "Grill",
+    image: "/assets/images/gal6.webp"
+  },
+]

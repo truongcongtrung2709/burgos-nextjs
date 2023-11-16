@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 
 export function useLocalStorage(key: string, initialState: any) {
   const [state, setState] = useState(initialState);
-
   useEffect(() => {
     const restored = getStorage(key);
 

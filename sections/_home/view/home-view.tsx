@@ -1,7 +1,6 @@
 
 import React from 'react'
 
-import MainLayout from '@/layouts/main/main-layout'
 
 
 import HomeHero from '../home-hero'
@@ -15,7 +14,7 @@ import HomeGallery from "../home-gallery"
 import { _homeGallery } from '@/_mock/_gallery'
 const HomeView = () => {
   return (
-    <MainLayout>
+    <>
       <HomeHero/>
       <HomeFeatures/>
       <HomeProducts/>
@@ -23,7 +22,8 @@ const HomeView = () => {
       <HomeContact/>
       <HomeFollow/>
       <HomeGallery gallery={_homeGallery}/>
-    </MainLayout>
+
+    </>
   )
 }
 

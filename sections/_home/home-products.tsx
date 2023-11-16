@@ -4,7 +4,9 @@ import {motion} from "framer-motion"
 import { Product } from "@/types/product";
 import { getProducts,productsURLEndpoint as cacheKey } from "@/services/productsAPI";
 import useSWR,{preload} from 'swr'
+
 preload(cacheKey,getProducts)
+
 const Products = () => {
 
 

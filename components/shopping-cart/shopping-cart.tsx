@@ -56,7 +56,7 @@ const ShoppingCart = ({isOpen} : ShopingCartProps) => {
           <Link className='text-white rounded inline-block min-w-[100px] min-h-[31px]  font-bold transition-all duration-[0.3s] ease-[ease] mx-2.5 my-0 p-2 bg-orange' href="/cart">Cart</Link>
         </p>
         <p className="woo-commerce_mini_cart_button uppercase text-sm rounded font-normal inline-block min-w-[100px] min-h-[31px] mb-[22px] pt-1">
-          <Link href='/checkout'  className=' bg-orange inline-block min-w-[100px] min-h-[31px] text-white font-bold transition-all duration-[0.3s] ease-[ease] mx-2.5 my-0 p-2 uppercase'>Checkout</Link>
+          <Link href='/checkout' onClick={()=>closeCart}  className=' bg-orange inline-block min-w-[100px] min-h-[31px] text-white font-bold transition-all duration-[0.3s] ease-[ease] mx-2.5 my-0 p-2 uppercase'>Checkout</Link>
         </p>
       </div>
           <p className="cart__empty_message absolute w-full text-xl text-black -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 hidden">No product in the cart.</p>
