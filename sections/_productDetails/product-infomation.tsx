@@ -1,3 +1,4 @@
+ /* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useState } from 'react'
 import ProductTabs from './product-tabs'
@@ -29,7 +30,7 @@ const ProductInfo = ({productDetails}:Props) => {
     <span className={`${productDetails?.sale? "" : "hidden"}sale absolute z-[1] inline-block min-h-[auto] w-auto text-white text-xs leading-[18px] font-semibold m-[15px] p-[5px] rounded-[14px] left-1.5  top-1.5 bg-orange font-nunito`}>Sale!</span>
     <div className="productDetails-left w-full md:w-[40%] mb-[2em]">
       <div className="img-item overflow-hidden relative ">
-        <Image src={productDetails?.image} width={1000} height={1119} alt="" />
+        <img src={productDetails?.image} width={1000} height={1119} alt="" />
       </div>
     </div>
     <div className="productDetails-summary mb-[2em] w-full pl-0 clear-none md:w-[60%] md:pl-[58px]">
