@@ -43,7 +43,7 @@ const Header = () => {
                   
                 </li>
                 <li className=' py-[16px]'>
-                  <Link href="/blogs" className={`${pathname === "/"?"lg:mr-[18px]  cursor-pointer    text-white relative group  border-yellow lg:py-0": pathname === "/blog"? "lg:mr-[18px]  cursor-pointer    text-yellow relative group  border-yellow lg:py-0":"lg:mr-[18px]  cursor-pointer    text-black relative group  border-yellow lg:py-0"}`}
+                  <Link href="/blogs" className={`${pathname === "/"?"lg:mr-[18px]  cursor-pointer    text-white relative group  border-yellow lg:py-0": pathname === "/blogs"? "lg:mr-[18px]  cursor-pointer    text-yellow relative group  border-yellow lg:py-0":"lg:mr-[18px]  cursor-pointer    text-black relative group  border-yellow lg:py-0"}`}
                   >BLOGS
                   <span className='bg-yellow absolute w-full h-1  -bottom-2 hidden group-hover:block left-0 animate__animated animate__fadeInDown animate__faster'></span></Link>
                   
