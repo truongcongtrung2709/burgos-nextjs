@@ -20,7 +20,8 @@ const ProductInfo = ({productDetails}:Props) => {
   const {productId} = useParams() as{
     productId: string
   }
-  function handleAddCart () {
+  function handleAddCart (e:any) {
+    e.preventDefault();
     addAmountCartQuantity(parseInt(productId),quantity);
   }
   return (
@@ -56,7 +57,7 @@ const ProductInfo = ({productDetails}:Props) => {
           <input type="number" value={quantity} readOnly className='w-[3.631em] text-center outline-none'/>
           <span className='text-dark-gray text-lg p-0 border-[none] cursor-pointer' onClick={() =>{setQuantity(quantity+1)}}>+</span>
         </div>
-        <button className='custom-button1 uppercase px-10 py-5 align-middle lg:px-[50px] lg:pt-[22px] pb-[20px]' onClick={handleAddCart}>Add To Cart</button>
+        <button type='submit' className='custom-button1 uppercase px-10 py-5 align-middle lg:px-[50px] lg:pt-[22px] pb-[20px]' onClick={handleAddCart}>Add To Cart</button>
       </form>
       <div className="productDetail-meta">
         <span className='text-text-color uppercase block font-bold mb-1.5'>
