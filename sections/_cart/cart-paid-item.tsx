@@ -20,13 +20,15 @@ const PaidCartItem = ({id,quantity} : CartTotalProps) => {
     revalidateOnReconnect:false,
   })
   
-  if(isLoading) return <div>...Loading...</div>
-  
-  if(error) return <div>...error...</div>
+
 
   
   const item = products?.find((i:Product) => i.id === id);
   if(item ==null) return null;
+
+  if(isLoading) return <div>...Loading...</div>
+  
+  if(error) return <div>...error...</div>
   return (
     <>
     <div className="cart-item flex justify-between">

@@ -16,13 +16,12 @@ const ShoppingCart = ({isOpen} : ShopingCartProps) => {
   const {closeCart,openCart, cartQuantity, cartItems}= useShoppingCart();
 
     const{data:products, isLoading, error} = useSWR(cacheKey,getProducts, 
-      {revalidateIfStale:false, revalidateOnFocus:false,revalidateOnReconnect:false})
-    if(isLoading) {
-      return <div className="text-center">...Loading</div>
-    }
-    if(error){
-      return <div className="text-center">false to get data</div>
-    }
+      {
+        revalidateIfStale:false,
+        revalidateOnFocus:false,
+        revalidateOnReconnect:false
+      })
+  
     
   return (
     <div className="shopping_cartwrapper">
@@ -38,6 +37,8 @@ const ShoppingCart = ({isOpen} : ShopingCartProps) => {
             </div>
         <div className="car_count_title">
         <ul className=" cart_list_widget h-[calc(100vh_-_150px)] overflow-y-auto text-black m-0 p-2.5 text-left py-6 leading-6 text-[15px]">
+          {isLoading? (<div className='text-center'>...Loading...</div>):(<></>)}
+          {error? (<div className='text-center'>...error...</div>):(<></>)}
           {cartItems.map(item=>(
             <CartItem key={item.id} {...item} products={products}/>
           ))}

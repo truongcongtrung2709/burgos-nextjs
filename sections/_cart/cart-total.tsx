@@ -1,9 +1,13 @@
 'use client'
 import { useShoppingCart } from "@/context/ShoppingCartContext"
 import { formatCurrency } from "@/utils/formatCurrency"
+
 import CartPaidItem from "./cart-paid-item"
+
+
 import { getProducts,productsURLEndpoint as cacheKey } from '@/services/productsAPI'
 import useSWR, {preload} from "swr"
+
 import { Product } from "@/types/product"
 
 preload(cacheKey,getProducts) 
@@ -33,6 +37,8 @@ if(error) return <div>...error...</div>
         </div>
         <div className="cart-body border-b-[1px] border-solid border-gray">
           <div className="cart-list p-4 overflow-y-auto h-[500px]">
+            {isLoading? (<div className='text-center'>...loading...</div>) :(<></>)}
+            {error? (<div>...error...</div>) :(<></>)}
           {cartItems.map(item => (
             <CartPaidItem key={item.id} {...item}/>
           ))}

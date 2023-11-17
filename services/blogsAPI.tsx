@@ -1,10 +1,15 @@
-import axios from "axios";
+import fetcher from "./fetcher";
 
-const blogsAPI = axios.create({baseURL: "https://burgos-be.onrender.com/"})
 
 export const blogsURLEndpoint = "/blogs"
 
 export const getBlogs = async() => {
-  const res = await blogsAPI.get(blogsURLEndpoint);
-  return res.data
+
+  try {
+    const res = await fetcher.get(blogsURLEndpoint);
+    return res.data
+  } catch (error) {
+    console.log(error);
+    
+  }
 }

@@ -1,4 +1,5 @@
-import ProductDetailView from "@/sections/_productDetail/view/product-detail-view";
+import ProductDetailView from "@/sections/_productDetails/view/product-detail-view";
+
 
 export const metadata = {
   title: 'Product',

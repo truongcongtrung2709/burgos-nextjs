@@ -1,21 +1,28 @@
+'use client'
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect, useState } from "react"
+
+import { useState } from "react"
 import { useForm } from "react-hook-form"
+
+
 import CheckoutCartItem from "./checkout-cart-item";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { useShoppingCart } from "@/context/ShoppingCartContext";
+
 import {Order} from "@/types/order"
 import { Product } from "@/types/product";
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { getProducts, productsURLEndpoint as cacheKey } from '@/services/productsAPI';
+import { getProducts, productsURLEndpoint as productsCacheKey } from '@/services/productsAPI';
 import useSWR,{preload} from "swr"
-
-preload(cacheKey,getProducts)
+import { getOrders, ordersURLEndpoint as ordersCacheKey } from '@/services/ordersAPI';
+preload(productsCacheKey,getProducts)
 const OrderDetails = () => {
   const router = useRouter();
-  const{data:products,isLoading, error} = useSWR(cacheKey,getProducts,
+  const {mutate} = useSWR(ordersCacheKey,getOrders)
+  const{data:products,isLoading, error} = useSWR(productsCacheKey,getProducts,
     {revalidateIfStale:false,
     revalidateOnFocus:false,
     revalidateOnReconnect:false})
@@ -46,6 +53,7 @@ const OrderDetails = () => {
     const url = 'https://burgos-be.onrender.com/orders'
     axios.post(url,data)
     .then((res)=>{
+      mutate(ordersCacheKey)
       alert("Your receipt has been sent");
       console.log(res); 
       deleteCart();

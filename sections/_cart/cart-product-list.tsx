@@ -1,12 +1,18 @@
 'use client'
-import {faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { useState } from 'react'
-import { getProducts,productsURLEndpoint as cacheKey } from '@/services/productsAPI'
-import useSWR, {preload} from "swr"
+
+
+import { productsURLEndpoint as cacheKey, getProducts } from '@/services/productsAPI'
+import useSWR, { preload } from "swr"
+
 import { Product } from '@/types/product'
 import CartProductItem from './cart-product-item'
+
 preload(cacheKey,getProducts) 
+
 const CartProductList = () => {
   const [search, setSearch] = useState<string>('')
 
@@ -16,9 +22,6 @@ const CartProductList = () => {
     revalidateOnReconnect:false,
   })
 
-  if(isLoading) return <div>...Loading...</div>
-
-  if(error) return <div>...error...</div>
   return (
     <div className="products xl:max-w-[50%] md:max-w-[70%] max-w-full w-full mr-3">
         <div className='products-header sticky bg-white h-16 z-[100] flex  my-0 pr-6 pl-8 pt-3 top-0 '>
@@ -37,6 +40,8 @@ const CartProductList = () => {
         <div className='products-body bg-white '>
         <p className='bg-gray leading-[20px] font-[500] text-md m-0 p-3'>All Products</p>
         <div className="product-list h-[500px] overflow-y-auto bg-white">
+          {isLoading? (<div className='text-center'>...loading...</div>) :(<></>)}
+          {error? (<div>...error...</div>) :(<></>)}  
         {products?.filter((item:Product)=> {
           return search.toLowerCase()=== '' ? item : item.name.toLowerCase().includes(search.toLowerCase())
         }).map((item:Product) => (

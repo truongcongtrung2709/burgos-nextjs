@@ -12,12 +12,6 @@ const Products = () => {
 
 const{data:products, isLoading, error} = useSWR(cacheKey,getProducts, 
   {revalidateIfStale:false, revalidateOnFocus:false,revalidateOnReconnect:false})
-if(isLoading) {
-  return <div className="text-center">...Loading</div>
-}
-if(error){
-  return <div className="text-center">false to get data</div>
-}
 
   return (
     <section className="our-products mb-[24px] xl:mb-[55px]">
@@ -31,6 +25,8 @@ if(error){
       </motion.h1>
       <div className="elemental-container">
         <div className="product-list mt-0 mb-6 xl:mb-[55px] grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-y-[48px] gap-x-5">
+        {isLoading? (<div className='text-center'>...loading...</div>) :(<></>)}
+        {error? (<div className='text-center'>...error...</div>) :(<></>)}
         {products?.map((burger:Product) => (
            <div key={burger.id} className="product-item  text-center">
            <ProductItem {...burger}/>

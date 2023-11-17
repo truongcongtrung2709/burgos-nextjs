@@ -13,8 +13,7 @@ preload(cacheKey,getProducts)
       revalidateOnFocus:false,
       revalidateOnReconnect:false})
 
-    if(isLoading) return <div className='text-center'>...Loading...</div>
-    if(error) return <div className='text-center'>...Error...</div>
+
 
   return (
     <>
@@ -27,6 +26,8 @@ preload(cacheKey,getProducts)
             </select>
           </form>
           <div className="product__list mb-10 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-7">
+            {isLoading? (<div className='text-center'>...loading...</div>) :(<></>)}
+            {error? (<div className='text-center'>...error...</div>) :(<></>)}
           {products?.map((burger:Product) => (
             <div key={burger.id} className="product-item  text-center">
               <ProductItem {...burger}/>

@@ -1,10 +1,15 @@
-import axios from "axios";
+import fetcher from "./fetcher";
 
-const featuresAPI = axios.create({baseURL:"https://burgos-be.onrender.com/"})
 
 export const featuresURLEndpoint = "/features"
 
 export const getFeatures = async () => {
-  const res = await featuresAPI.get(featuresURLEndpoint);
-  return res.data
+
+  try {
+    const res = await fetcher.get(featuresURLEndpoint);
+    return res.data
+  } catch (error) {
+    console.log(error);
+    
+  }
 }
