@@ -1,6 +1,4 @@
 'use client'
-
-
 import {  productsURLEndpoint as cacheKey } from '@/services/productsAPI';
 import useSWR,{preload} from "swr"
 import ProductDetailBreadcrumb from '../product-detail-breadcumb';
@@ -11,8 +9,8 @@ import { Product } from '@/types/product';
 preload(cacheKey,fetcher)
 
 const ProductDetailView = () => {
-  const params = useParams()
-  const {data:productDetails}:any = useSWR(()=> cacheKey + "/" + params.productId,fetcher)
+  const {productId} = useParams()
+  const {data:productDetails}:any = useSWR(()=> cacheKey + "/" + productId,fetcher)
   
   return (
     <div className='container'>
