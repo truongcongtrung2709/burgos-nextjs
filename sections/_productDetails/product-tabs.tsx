@@ -1,10 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar  } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
-import { Product } from '@/types/product';
-
+import { Product, Review } from '@/types/product';
+import ReactStars from 'react-stars'
+import Rating from '@/components/rating-stars/rating-stars';
 type Props = {
   productDetails: Product
 }
@@ -13,7 +14,10 @@ const ProductTabs = ({productDetails}:Props) => {
   
   const [TabDesc, setTabDesc] = useState(true)
   const [TabRev, setTabRev] = useState(false)
-
+  const [review, setReview] = useState<Review[]>([])
+  useEffect(()=>{
+    setReview(productDetails?.review)
+  },[productDetails?.review,review])
   function handleTabDescription() {
     setTabDesc(true)
     setTabRev(false)
@@ -34,7 +38,7 @@ const ProductTabs = ({productDetails}:Props) => {
         <a onClick={handleTabDescription} className={`${TabDesc ? "text-orange border-orange":"text-text-color border-text"} placeholder:file:border-solid border-[1px] rounded-[5px] font-medium px-9 py-1.5 my-3 mx-0 md:m-0 uppercase w-full block md:inline-block`}>Description</a>
       </li>
       <li className='description_tab bg-white  z-[2] relative  p-0 my-3 mx-0 md:mx-[-5px] md:my-0 md:px-[1em] md:py-0'>
-        <a onClick={handleTabReview} className={`${TabRev ? "text-orange border-orange":"text-text-color border-text"} border-solid border-[1px] rounded-[5px]  font-medium px-9 py-1.5 my-3 mx-0 md:m-0 uppercase w-full block md:inline-block`}>Review(2)</a>
+        <a onClick={handleTabReview} className={`${TabRev ? "text-orange border-orange":"text-text-color border-text"} border-solid border-[1px] rounded-[5px]  font-medium px-9 py-1.5 my-3 mx-0 md:m-0 uppercase w-full block md:inline-block`}>Review({review?.length})</a>
       </li>
     </ul>
     <div id='tab-content1' className={`${TabDesc ?"" :""}tab-content1 mt-0 mb-[2em] mx-0 p-0`}>
@@ -46,7 +50,7 @@ const ProductTabs = ({productDetails}:Props) => {
           <span className='text-[15px] font-extrabold text-text-color font-lato'>{productDetails?.weight}g</span>
         </div>
       </div>
-      <div className="ingridients row bg-[#E7E7E7] mb-3 p-[0.5rem] m-0">
+      <div className="ingredients row bg-[#E7E7E7] mb-3 p-[0.5rem] m-0">
         <div className='col flex-[0_0_100%] max-w-full xs:flex-[0_0_16.666667%] xs:max-w-[16.666667%]'>Ingredients:</div>
         <div className='flex-[0_0_100%] max-w-full col xs:flex-[0_0_50%] xs:max-w-[50%]'>
           <span className='text-[15px] font-extrabold text-text-color font-lato'>{productDetails?.ingredients}</span>
@@ -57,55 +61,34 @@ const ProductTabs = ({productDetails}:Props) => {
     </div>
 
     <div id='tab-content2' className={`${TabRev ? "": ""} hidden tab-content2 mt-0 mb-[2em] mx-0 p-0`}>
+    
       <div className='comment'>
+        
         <h2 className='title-comment text-3xl leading-[56px] font-semibold mb-[18px] text-center'>
-        2 reviews for <span className='text-3xl leading-[56px] font-semibold'>{productDetails?.name}</span>
+        {review?.length} reviews for <span className='text-3xl leading-[56px] font-semibold'>{productDetails?.name}</span>
         </h2>
         <ol className='comment-list m-0 w-full mb-[46px] '>
-          <li className='comment-item mb-3'>
-            <div className="comment-container relative border pl-1.5 pr-3 py-1.5 rounded-[3px] border-solid border-[#cccccc]">
-              <Image src="/assets/images/icons/avatar.png" width={60} height={60} className='float-left  w-8 h-auto border shadow-none m-0 p-0 border-solid border-[#e4e1e3] bg-[#ebe9eb] absolute left-6 top-6' alt="" />
-              <div className="comment-text rounded ml-[50px] mr-0 my-0 pt-[1em] pb-0 px-[1em]">
-                <div className="star-rating float-right leading-[1] mt-[-3px] overflow-hidden relative h-[25px] text-base tracking-[10px] w-[129px]  ml-0 -mr-3.5 mb-0 text-yellow">
-                <FontAwesomeIcon icon={faStar}/>
-                <FontAwesomeIcon className='px-1' icon={faStar}/>
-                <FontAwesomeIcon className='' icon={faStar}/>
-                <FontAwesomeIcon className='px-1' icon={faStar}/>
-                <FontAwesomeIcon icon={faStar}/>
-                </div>
-                <p className='meta text-[15px] mt-[-9px] leading-[1.7] text-[#767676  mb-[1em] mx-0]'>
-                  <strong className='font-[800] text-[16px] text-black-navy mb-0'>admin</strong>
-                  <span className='text-[15px]'>-</span>
-                  <time className='italic text-[15px] text-[#979797]'>November 5, 2020</time>
-                </p>
-                <div className="description">
-                  <p className='mb-[1em] leading-[1.7]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                </div>
+          {review?.map((review,index) => (
+          <li key={index} className='comment-item mb-3'>
+          <div className="comment-container relative border pl-1.5 pr-3 py-1.5 rounded-[3px] border-solid border-[#cccccc]">
+            <Image src="/assets/images/icons/avatar.png" width={60} height={60} className='float-left  w-8 h-auto border shadow-none m-0 p-0 border-solid border-[#e4e1e3] bg-[#ebe9eb] absolute left-6 top-6' alt="" />
+            <div className="comment-text rounded ml-[50px] mr-0 my-0 pt-[1em] pb-0 px-[1em]">
+              <div className="star-rating float-right leading-[1] mt-[-3px] overflow-hidden relative h-[25px] text-base tracking-[10px] w-[129px]  ml-0 -mr-3.5 mb-0 text-yellow">
+              <Rating value={review?.rating}/>
+              </div>
+              <p className='meta text-[15px] mt-[-9px] leading-[1.7] text-[#767676  mb-[1em] mx-0]'>
+                <strong className='font-[800] text-[16px] text-black-navy mb-0'>{review?.name}</strong>
+                <span className='text-[15px]'> - </span>
+                <time className='italic text-[15px] text-[#979797]'>{review?.date}</time>
+              </p>
+              <div className="description">
+                <p className='mb-[1em] leading-[1.7]'>{review?.comment}</p>
               </div>
             </div>
-          </li>
-          <li className='comment-item mb-3'>
-            <div className="comment-container relative border pl-1.5 pr-3 py-1.5 rounded-[3px] border-solid border-[#cccccc]">
-              <Image src="/assets/images/icons/avatar.png" width={60} height={60} className='float-left  w-8 h-auto border shadow-none m-0 p-0 border-solid border-[#e4e1e3] bg-[#ebe9eb] absolute left-6 top-6' alt="" />
-              <div className="comment-text rounded ml-[50px] mr-0 my-0 pt-[1em] pb-0 px-[1em]">
-                <div className="star-rating float-right leading-[1] mt-[-3px] overflow-hidden relative h-[25px] text-base tracking-[10px] w-[129px]  ml-0 -mr-3.5 mb-0 text-yellow">
-                <FontAwesomeIcon icon={faStar}/>
-                <FontAwesomeIcon className='px-1' icon={faStar}/>
-                <FontAwesomeIcon className='' icon={faStar}/>
-                <FontAwesomeIcon className='px-1' icon={faStar}/>
-                <FontAwesomeIcon icon={faStar}/>
-                </div>
-                <p className='meta text-[15px] mt-[-9px] leading-[1.7] text-[#767676  mb-[1em] mx-0]'>
-                  <strong className='font-[800] text-[16px] text-black-navy mb-0'>admin</strong>
-                  <span className='text-[15px]'>-</span>
-                  <time className='italic text-[15px] text-[#979797]'>November 5, 2020</time>
-                </p>
-                <div className="description">
-                  <p className='mb-[1em] leading-[1.7]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                </div>
-              </div>
-            </div>
-          </li>
+          </div>
+        </li>
+          ))}
+          
         </ol>
       </div>
       <div className='review_form'>

@@ -11,7 +11,6 @@ preload(cacheKey,fetcher)
 const ProductDetailView = () => {
   const {productId} = useParams()
   const {data:productDetails}:any = useSWR(()=> cacheKey + "/" + productId,fetcher)
-  
   return (
     <div className='container'>
       <div className="productDetails flex pt-[96px] mb-[35px]">
