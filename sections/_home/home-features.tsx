@@ -11,8 +11,8 @@ const HomeFeatures = () => {
   const {data:features,error,isLoading} = useSWR(cacheKey,getFeatures,{
     revalidateIfStale:false, revalidateOnReconnect:false, revalidateOnFocus:false
   });
-  if(error)return <div className="text-cen">...Error...</div>
-  if(isLoading)return <div className="text-center">Loading...</div>
+  if(error)return <div className="text-center">...Error...</div>
+  if(isLoading)return <div className="text-center">...Loading...</div>
   return (
     <>
       {features.slice(0,3).map((feature:Feature) => (

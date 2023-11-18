@@ -17,17 +17,20 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { getProducts, productsURLEndpoint as productsCacheKey } from '@/services/productsAPI';
 import useSWR,{preload} from "swr"
-import { getOrders, ordersURLEndpoint as ordersCacheKey } from '@/services/ordersAPI';
+import { addOrder, ordersURLEndpoint as ordersCacheKey } from '@/services/ordersAPI';
+import fetcher from "@/services/fetcher"
+import { mutate } from "swr"
+import { ToastContainer, toast } from "react-toastify"
 preload(productsCacheKey,getProducts)
 const OrderDetails = () => {
   const router = useRouter();
-  const {mutate} = useSWR(ordersCacheKey,getOrders)
   const{data:products,isLoading, error} = useSWR(productsCacheKey,getProducts,
     {revalidateIfStale:false,
     revalidateOnFocus:false,
     revalidateOnReconnect:false})
 
   const{
+    cartQuantity,
     cartItems,
      deleteCart
     }= useShoppingCart();
@@ -49,17 +52,16 @@ const OrderDetails = () => {
     data.subTotal = total ;
     data.total = total;
     
-    console.log(data);
-    const url = 'https://burgos-be.onrender.com/orders'
-    axios.post(url,data)
-    .then((res)=>{
-      mutate(ordersCacheKey)
-      alert("Your receipt has been sent");
-      console.log(res); 
-      deleteCart();
+    if(cartQuantity=== 0){
+      alert("You dont have any items in your cart")
       router.push("/")
-    })
-    .catch((err)=> console.log(err.message)); 
+    }else{
+      console.log(data);
+      addOrder(data);
+      alert("Your order has been sent successfully")
+      deleteCart();
+    }
+    
     })
       
 
@@ -67,6 +69,7 @@ const OrderDetails = () => {
     if(error) return <div className='text-center'>...Error...</div>
   return (
     <>
+    
     <form>
       <div className="coupon relative bg-[#f7f6f7] text-[#515151] w-auto mt-0 mb-[2em] mx-0 pl-[3.5em] pr-[2em] py-[1em] border-t-[3px]  border-[#fbb731] border-solid">
         <FontAwesomeIcon className="text-yellow pr-[5px]" icon={faCalendar}/>
@@ -245,6 +248,7 @@ return  total + (item?.price||0) * cartItem.quantity
         <div className="p-[1em] mb-[6px] flex flex-wrap">
           <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#" className="hover:text-yellow text-black-navy">privacy policy</a></p>
           <button type="submit" className="float-none w-full bg-orange text-white rounded-[5px] uppercase leading-[1] cursor-pointer relative px-[1em] py-[0.618em] font-bold border-none md:float-left md:w-auto" onClick={onSubmit}>Place order</button>
+
         </div>
         
       </div>

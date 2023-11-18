@@ -17,7 +17,7 @@ type Props = {
 const ProductInfo = ({productDetails}:Props) => {
   const {addAmountCartQuantity} = useShoppingCart();
   const [quantity, setQuantity] = useState(1)
-
+  
   const {productId} = useParams() as{
     productId: string
   }
@@ -50,7 +50,7 @@ const ProductInfo = ({productDetails}:Props) => {
         <span className='text-3xl leading-[38px] font-extrabold text-yellow mr-[5px]'>${productDetails?.price}.00</span>
       </p>
       <div className="description">
-        <p className='text-[15px] mb-5 pt-1'>{productDetails?.desc}</p>
+        <p className='text-[15px] mb-5 pt-1'>{productDetails?.desc.split("\n")[0]}</p>
       </div>
       <form className='mb-[2em] mt-[30px] '>
         <div className="quantity float-left mb-3 w-[132px] border mr-5 pt-[13px] pb-3.5 px-[25px] rounded-[5px] border-solid border-[#ccc] flex justify-between items-center">

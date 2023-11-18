@@ -10,6 +10,7 @@ type Props = {
 }
 
 const ProductTabs = ({productDetails}:Props) => {
+  
   const [TabDesc, setTabDesc] = useState(true)
   const [TabRev, setTabRev] = useState(false)
 
@@ -38,21 +39,21 @@ const ProductTabs = ({productDetails}:Props) => {
     </ul>
     <div id='tab-content1' className={`${TabDesc ?"" :""}tab-content1 mt-0 mb-[2em] mx-0 p-0`}>
       <h2 className='text-3xl text-center mb-0'>Description</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>{productDetails?.desc.split("\n")[1]}</p>
       <div className="weight row bg-[#f8f8f8] p-[0.5rem] m-0">
         <div className='flex-[0_0_100%] max-w-full col xs:flex-[0_0_16.666667%] xs:max-w-[16.666667%]'>Weight:</div>
         <div className='flex-[0_0_100%] max-w-full col xs:flex-[0_0_50%] xs:max-w-[50%]'>
-          <span className='text-[15px] font-extrabold text-text-color font-lato'>345g</span>
+          <span className='text-[15px] font-extrabold text-text-color font-lato'>{productDetails?.weight}g</span>
         </div>
       </div>
       <div className="ingridients row bg-[#E7E7E7] mb-3 p-[0.5rem] m-0">
-        <div className='col flex-[0_0_100%] max-w-full xs:flex-[0_0_16.666667%] xs:max-w-[16.666667%]'>Ingridients:</div>
+        <div className='col flex-[0_0_100%] max-w-full xs:flex-[0_0_16.666667%] xs:max-w-[16.666667%]'>Ingredients:</div>
         <div className='flex-[0_0_100%] max-w-full col xs:flex-[0_0_50%] xs:max-w-[50%]'>
-          <span className='text-[15px] font-extrabold text-text-color font-lato'>Duis vitae justo tempor, vulputate libero sit amet, lacinia nulla. Fusce eu turpis quis</span>
+          <span className='text-[15px] font-extrabold text-text-color font-lato'>{productDetails?.ingredients}</span>
         </div>
 
       </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>{productDetails?.desc.split("\n")[2]}</p>
     </div>
 
     <div id='tab-content2' className={`${TabRev ? "": ""} hidden tab-content2 mt-0 mb-[2em] mx-0 p-0`}>
