@@ -26,7 +26,7 @@ const ProductInfo = ({productDetails}:Props) => {
     addAmountCartQuantity(parseInt(productId),quantity);
   }
   return (
-    <div className="productDetails__item relative md:flex flex-wrap">
+    <>
     <span className={`${productDetails?.sale? "" : "hidden"}sale absolute z-[1] inline-block min-h-[auto] w-auto text-white text-xs leading-[18px] font-semibold m-[15px] p-[5px] rounded-[14px] left-1.5  top-1.5 bg-orange font-nunito`}>Sale!</span>
     <div className="productDetails-left w-full md:w-[40%] mb-[2em]">
       <div className="img-item overflow-hidden relative ">
@@ -68,9 +68,8 @@ const ProductInfo = ({productDetails}:Props) => {
       </div>
 
     </div>
-    <ProductTabs productDetails={productDetails}/>
-    <ProductsRelated/>
-  </div>
+    
+    </>
   )
 }
 

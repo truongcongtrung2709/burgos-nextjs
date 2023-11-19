@@ -41,6 +41,8 @@ const OrderDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Order>()
+
+  
   const onSubmit = handleSubmit((data) => {
     const total =   cartItems.reduce((total, cartItem) =>{
     const item = products?.find((i:Product) => i.id === cartItem.id)   

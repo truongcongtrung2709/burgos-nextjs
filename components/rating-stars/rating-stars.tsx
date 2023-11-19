@@ -7,10 +7,6 @@ const Rating = ({ value }:any) => {
   for (i = 0; i < value; i++) { 
     stars[i] = <FontAwesomeIcon key={i} icon={faStar} className='text-yellow' />;
   }
-
-  if (value % 1 != 0) // if value is a decimal, add a half star
-    stars[i-1] = <FontAwesomeIcon key={i+1} icon={faStarHalfStroke} className='text-yellow' />;
-
   return <div className="rating">{stars}</div>;
 };
 export default Rating;
