@@ -3,7 +3,6 @@ import { Blog } from '@/types/blog'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleRight, faCalendar, faFolder, faUserCircle } from '@fortawesome/free-regular-svg-icons'
-import Image from 'next/image'
 
 type Props = {
   blogDetails:Blog

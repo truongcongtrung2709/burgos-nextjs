@@ -39,7 +39,7 @@ const Instruction = () => {
                         <div className="">
                           <div className="circle-box1 text-center max-w-[300px] mx-auto my-0 ">
                             <div className="circle-image mx-auto mt-0 mb-[24px] bg-instruction rounded-[500px]">
-                              <Image alt="" width={280} height={275} className='hover:-translate-y-4 transition-all hover:transition-all h-auto max-w-full rounded-none shadow-none border-0' src="/assets/images/intruction1.webp" /> 
+                              <Image priority alt="" width={280} height={275} className='hover:-translate-y-4 transition-all hover:transition-all h-auto max-w-full rounded-none shadow-none border-0' src="/assets/images/intruction1.webp" /> 
                             </div> 
                             <div className="circle-text max-w-[220px] mx-auto my-0">
                               <h3 className='text-3xl font-extrabold leading-[38px] text-black-navy'>Select your food</h3>
@@ -66,7 +66,7 @@ const Instruction = () => {
                                 <p className='mx-auto max-w-[250px]'>Quisque nec libero dictum commodo. Nam ac felis id libero</p> 
                               </div> 
                               <div className="circle-image mx-auto mt-0 mb-[24px] bg-instruction rounded-[500px] order-1 md:order-12 flex-[0_0_100%] max-w-full relative w-full pr-[15px] pl-[15px]">
-                                <Image alt="" width={270} height={270} className='hover:-translate-y-4 transition-all hover:transition-all h-auto max-w-full rounded-none shadow-none border-0' src="/assets/images/intruction2.webp" /> 
+                                <Image priority alt="" width={270} height={270} className='hover:-translate-y-4 transition-all hover:transition-all h-auto max-w-full rounded-none shadow-none border-0' src="/assets/images/intruction2.webp" /> 
                               </div> 
                             </div>   
                           </div>   
@@ -85,7 +85,7 @@ const Instruction = () => {
                         <div className="">
                           <div className="circle-box1 text-center max-w-[300px] mx-auto my-0">
                             <div className="circle-image mx-auto mt-0 mb-[24px] bg-instruction rounded-[500px]">
-                              <Image alt="" width={300} height={300} className='hover:-translate-y-4 transition-all hover:transition-all  h-auto max-w-full rounded-none shadow-none border-0' src="/assets/images/intruction3.webp" /> 
+                              <Image priority alt="" width={300} height={300} className='hover:-translate-y-4 transition-all hover:transition-all  h-auto max-w-full rounded-none shadow-none border-0' src="/assets/images/intruction3.webp" /> 
                             </div> 
                             <div className="circle-text max-w-[220px] mx-auto my-0">
                               <h3 className='text-3xl font-extrabold leading-[38px] text-black-navy'>Pickup or delivery</h3>

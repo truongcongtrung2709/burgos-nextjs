@@ -5,6 +5,7 @@ import { useShoppingCart } from '@/context/ShoppingCartContext'
 import { Product } from '@/types/product'
 import { getProducts,productsURLEndpoint as cacheKey } from '@/services/productsAPI'
 import useSWR, {preload} from "swr"
+import { useEffect } from 'react'
 
 preload(cacheKey,getProducts) 
 type CartTotalProps = {
@@ -20,21 +21,19 @@ const PaidCartItem = ({id,quantity} : CartTotalProps) => {
     revalidateOnReconnect:false,
   })
   
+    const item = products?.find((i:Product) => i.id === id);
+    if(item ==null) return null;
+  
 
 
   
-  const item = products?.find((i:Product) => i.id === id);
-  if(item ==null) return null;
-
-  if(isLoading) return <div>...Loading...</div>
-  
-  if(error) return <div>...error...</div>
+ 
   return (
     <>
     <div className="cart-item flex justify-between">
                     <h3 className='text-sm text-black font-semibold mr-2'>{item.name}</h3>
-                    
-              
+                    {isLoading ? (<div className='text-center'>...Loading...</div>) : (<></>)}
+                    {error ? (<div className='text-center'>...Error...</div>) : (<></>)}
                   <div className="quantity flex items-center">
                   <button onClick={()=>decreaseCartQuantity(id)} className='bg-hero-pattern w-5 h-5 rounded-full'><FontAwesomeIcon className='text-white p-[2px] ' icon={faMinus}/></button>
                   <div  className='w-10 text-center'>

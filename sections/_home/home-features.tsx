@@ -74,7 +74,7 @@ const HomeFeatures = () => {
                               <div className="m-0 p-0 flex flex-wrap ">
                                 <div className={`${(feature.id)%2===0 ? "relative w-full pr-0 pl-0 flex-[0_0_100%]   md:pr-[1rem] md:flex-[0_0_auto] md:w-auto md:basis-0 md:flex-grow md:min-w-0 md:max-w-full " :"relative w-full pr-0 pl-0 flex-[0_0_100%] max-w-full   md:pr-[1rem] md:flex-[0_0_auto] md:w-auto md:max-w-full "}`}>
                                   <h5 className="px-0 md:pr-3 mt-[-2px] font-Nunito Sans text-4xl leading-[72px] md:mb-0 font-black text-black-navy">
-                                    ${feature.price}
+                                  ${feature.price}
                                   </h5>
                                 </div>
                                 <div className="p-0 flex-[0_0_100%] max-w-full relative w-full md:basis-0 md:grow md:min-w-0" >

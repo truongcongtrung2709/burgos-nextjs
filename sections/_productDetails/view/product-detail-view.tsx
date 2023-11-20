@@ -5,7 +5,6 @@ import ProductDetailBreadcrumb from '../product-detail-breadcumb';
 import ProductInfo from '../product-infomation';
 import { useParams } from 'next/navigation'
 import fetcher from '@/services/fetcher';
-import { Product } from '@/types/product';
 import ProductTabs from '../product-tabs';
 import ProductsRelated from '../products-related';
 preload(cacheKey,fetcher)
@@ -23,8 +22,6 @@ const ProductDetailView = () => {
           <ProductTabs productDetails={productDetails?.data}/>
           <ProductsRelated/>
         </div>
-        
-
         </div>
       </div>
     </div>
