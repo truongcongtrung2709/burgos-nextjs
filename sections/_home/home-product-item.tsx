@@ -6,6 +6,7 @@ import { useShoppingCart } from "@/context/ShoppingCartContext"
 import { useRouter } from 'next/navigation';
 import {motion} from "framer-motion"
 import Image from "next/image";
+import Rating from "@/components/rating-stars/rating-stars";
 type ProductItemProps= {
   id:number,
   image:string,
@@ -39,21 +40,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
                />
              </div>
              <div className=" relative star-rating w-[129px] h-5 tracking-[10px] mx-auto text-md overflow-hidden text-yellow ">
-               <i className="">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="px-2">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="px-2">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
+               <Rating value={3}/>
              </div>
              <h2 className="mt-3 mb-[5px] text-lg leading-[1.6] font-extrabold group-hover:text-orange group-hover:transition-all transition-all">
                {name}

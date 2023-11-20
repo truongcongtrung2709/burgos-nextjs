@@ -102,7 +102,7 @@ const Footer = () => {
                         <div className="latest-posts inline-block mx-auto text-left ">
                           <div className="media overflow-hidden flex items-start">
                             <div className="pull-left pr-[10px] float-left">
-                              <Link href="/assets/images/latest-post1.webp">
+                              <Link href="/">
                                 <Image alt='latest-post1' width={64} height={64} src="/assets/images/latest-post1.webp" className="img-responsive text-white" sizes="(max-width: 64px) 100vw, 64px" />
                               </Link>
                             </div>

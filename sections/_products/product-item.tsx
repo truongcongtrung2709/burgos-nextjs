@@ -1,10 +1,16 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+'use client'
 import { formatCurrency } from "@/utils/formatCurrency";
 import { useShoppingCart } from "@/context/ShoppingCartContext"
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
+import Rating from "@/components/rating-stars/rating-stars";
+import { getAverageRatingStars } from "@/utils/getAverageRatingStars";
+import useSWR from "swr"
+import { productsURLEndpoint } from "@/services/productsAPI";
+import fetcher from "@/services/fetcher";
+import { useEffect, useState } from "react";
+import { Review } from "@/types/reviews";
+import { useRatingStars } from "@/context/RatingStarsContext";
 type ProductItemProps= {
   id:number,
   image:string,
@@ -16,10 +22,13 @@ type ProductItemProps= {
 
 const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) => {
   const { increaseCartQuantity} = useShoppingCart()
+  const {getAverageRatingStars} = useRatingStars()
   const router = useRouter();
   function handleClickItem(id:number){
     router.push(`/products/${id}`);
   }
+
+
   return (
     <>
            <a onClick={()=>handleClickItem(id)} className="block mb-5 animate__animated animate__fadeIn">
@@ -35,21 +44,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
                />
              </div>
              <div className="relative star-rating w-[129px] h-5 tracking-[10px] mx-auto text-md overflow-hidden text-yellow ">
-               <i className="">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="px-2">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="px-2">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
-               <i className="">
-                 <FontAwesomeIcon icon={faStar} />
-               </i>
+             {/* <Rating /> */}
              </div>
              <h2 className="mt-3 mb-[5px] text-lg leading-[1.6] font-extrabold">
                {name}

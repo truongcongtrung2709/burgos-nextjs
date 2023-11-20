@@ -1,6 +1,6 @@
  /* eslint-disable @next/next/no-img-element */
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductTabs from './product-tabs'
 import ProductsRelated from './products-related'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,9 @@ import { Product } from '@/types/product';
 import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import { useParams } from 'next/navigation';
+import Rating from '@/components/rating-stars/rating-stars';
+import { Review } from '@/types/reviews';
+import { getAverageRatingStars } from '@/utils/getAverageRatingStars';
 
 type Props = {
   productDetails: Product
@@ -17,7 +20,12 @@ type Props = {
 const ProductInfo = ({productDetails}:Props) => {
   const {addAmountCartQuantity} = useShoppingCart();
   const [quantity, setQuantity] = useState(1)
-  
+  const [reviews, setReviews] = useState<Review[]>();
+  useEffect(()=>{
+    setReviews(productDetails?.reviews)
+
+  },[productDetails])
+
   const {productId} = useParams() as{
     productId: string
   }
@@ -37,11 +45,7 @@ const ProductInfo = ({productDetails}:Props) => {
       <h1 className='text-[35px] leading-[50px] font-extrabold md:text-[44px] md:leading-[65px] uppercase lg:text-6xl lg:leading-[81px] '>{productDetails?.name}</h1>
       <div className="rating">
         <div className="float-left ml-0 mr-1  mb-0 overflow-hidden relative h-[25px] tracking-[10px] w-[129px] text-yellow">
-          <FontAwesomeIcon className='' icon={faStar}/>
-          <FontAwesomeIcon className='px-1' icon={faStar}/>
-          <FontAwesomeIcon className='' icon={faStar}/>
-          <FontAwesomeIcon className='px-1' icon={faStar}/>
-          <FontAwesomeIcon className='' icon={faStar}/>
+        <Rating value={getAverageRatingStars(reviews)}/>
         </div>
         <a href="#review" className='text-dark-gray ml-3'> (customer reviews)</a>
       </div>
