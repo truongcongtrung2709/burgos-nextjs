@@ -36,8 +36,8 @@ const ProductReviewsTab = ({review,productDetails} : Props) => {
     data.date = getCurrentDate();
     console.log(data);
     addReview(data)
-    mutate()
     alert("your review has been sent successfully")
+    mutate()
   })
   return (
     <div id='tab-content2' className={` hidden tab-content2 mt-0 mb-[2em] mx-0 p-0`}>
