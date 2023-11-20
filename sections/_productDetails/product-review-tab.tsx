@@ -3,16 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar  } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import Rating from '@/components/rating-stars/rating-stars';
-import { Product, Review } from '@/types/product';
+import { Product } from '@/types/product';
+import { Review } from '@/types/reviews';
 import { useForm } from 'react-hook-form';
-import { addReviewById } from '@/services/reviewsAPI';
 import { useParams } from 'next/navigation';
+import { addReview, getReviews, reviewsURLEndpoint } from '@/services/reviewsAPI';
+import useSWR from "swr"
+import { getCurrentDate } from '@/utils/getCurrentDate';
+
 type Props = {
   review:Review[]
   productDetails: Product
 }
 
 const ProductReviewsTab = ({review,productDetails} : Props) => {
+  const {mutate} = useSWR(reviewsURLEndpoint,getReviews, { 
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  })
   const {productId} = useParams() as{
     productId: string
   }
@@ -23,15 +32,18 @@ const ProductReviewsTab = ({review,productDetails} : Props) => {
 
   const onSubmit = handleSubmit((data,e:any) => {
     e.preventDefault();
-    console.log(productDetails);
-    
+    data.productId = parseInt(productId)
+    data.date = getCurrentDate();
+    console.log(data);
+    addReview(data)
+    mutate()
   })
   return (
     <div id='tab-content2' className={` hidden tab-content2 mt-0 mb-[2em] mx-0 p-0`}>
       <div className='comment'>
         
         <h2 className='title-comment text-3xl leading-[56px] font-semibold mb-[18px] text-center'>
-        {review?.length} reviews for <span className='text-3xl leading-[56px] font-semibold'>{productDetails?.name}</span>
+        {!review?.length ? 0: review?.length} reviews for <span className='text-3xl leading-[56px] font-semibold'>{productDetails?.name}</span>
         </h2>
         <ol className='comment-list m-0 w-full mb-[46px] '>
           {review?.map((review,index) => (
