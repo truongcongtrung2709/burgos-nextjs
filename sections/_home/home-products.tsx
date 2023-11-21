@@ -2,17 +2,24 @@
 import ProductItem from "./home-product-item";
 import {motion} from "framer-motion"
 import { Product } from "@/types/product";
-import { getProducts,productsURLEndpoint as cacheKey } from "@/services/productsAPI";
-import useSWR,{preload} from 'swr'
-
-preload(cacheKey,getProducts)
+import { productsURLEndpoint as cacheKey } from "@/services/productsAPI";
+import useSWR from 'swr'
+import fetcher from "@/services/fetcher";
+import { useEffect, useState } from "react";
 
 const Products = () => {
 
+  const {mutate,data:productsData,isLoading,error}:any = useSWR(()=> cacheKey + "?_embed=reviews",fetcher,
+  {revalidateIfStale:false,
+  revalidateOnFocus:false,
+  revalidateOnReconnect:false})
 
-const{data:products, isLoading, error} = useSWR(cacheKey,getProducts, 
-  {revalidateIfStale:false, revalidateOnFocus:false,revalidateOnReconnect:false})
-
+const [products, setProducts] = useState<Product[]>([])
+useEffect(()=>{
+  mutate()
+  setProducts(productsData?.data)
+},[productsData,mutate])
+  
   return (
     <section className="our-products mb-[24px] xl:mb-[55px]">
       <motion.h1
@@ -25,8 +32,8 @@ const{data:products, isLoading, error} = useSWR(cacheKey,getProducts,
       </motion.h1>
       <div className="elemental-container">
         <div className="product-list mt-0 mb-6 xl:mb-[55px] grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-y-[48px] gap-x-5">
-        {isLoading? (<div className='text-center'>...loading...</div>) :(<></>)}
-        {error? (<div className='text-center'>...error...</div>) :(<></>)}
+          {isLoading? (<div className="text-center">...Loading...</div>) : (<></>)}
+          {error? (<div className="text-center">...Error...</div>) : (<></>)}
         {products?.map((burger:Product) => (
            <div key={burger.id} className="product-item  text-center">
            <ProductItem {...burger}/>

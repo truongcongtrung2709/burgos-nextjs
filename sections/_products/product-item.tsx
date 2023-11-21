@@ -3,26 +3,21 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { useShoppingCart } from "@/context/ShoppingCartContext"
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Rating from "@/components/rating-stars/rating-stars";
-import { getAverageRatingStars } from "@/utils/getAverageRatingStars";
-import useSWR from "swr"
-import { productsURLEndpoint } from "@/services/productsAPI";
-import fetcher from "@/services/fetcher";
-import { useEffect, useState } from "react";
 import { Review } from "@/types/reviews";
-import { useRatingStars } from "@/context/RatingStarsContext";
+import { getAverageRatingStars } from "@/utils/getAverageRatingStars";
+import Rating from "@/components/rating-stars/rating-stars";
 type ProductItemProps= {
   id:number,
   image:string,
   name:string,
   oldPrice:string,
   price:number,
-  sale:boolean
+  sale:boolean,
+  reviews: Review[]
 }
 
-const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) => {
+const ProductItem = ({id, image, name, oldPrice,price,sale,reviews}:ProductItemProps) => {
   const { increaseCartQuantity} = useShoppingCart()
-  const {getAverageRatingStars} = useRatingStars()
   const router = useRouter();
   function handleClickItem(id:number){
     router.push(`/products/${id}`);
@@ -44,7 +39,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
                />
              </div>
              <div className="relative star-rating w-[129px] h-5 tracking-[10px] mx-auto text-md overflow-hidden text-yellow ">
-             {/* <Rating /> */}
+             <Rating value={getAverageRatingStars(reviews)}/>
              </div>
              <h2 className="mt-3 mb-[5px] text-lg leading-[1.6] font-extrabold">
                {name}

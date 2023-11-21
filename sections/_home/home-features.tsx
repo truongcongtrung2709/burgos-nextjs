@@ -5,16 +5,17 @@ import Link from "next/link";
 import useSWR,{preload} from "swr";
 import { getFeatures, featuresURLEndpoint as cacheKey } from "@/services/featuresAPI";
 import { Feature } from "@/types/features";
-import { formatCurrency } from "@/utils/formatCurrency";
 preload(cacheKey,getFeatures);
 const HomeFeatures = () => {
   const {data:features,error,isLoading} = useSWR(cacheKey,getFeatures,{
-    revalidateIfStale:false, revalidateOnReconnect:false, revalidateOnFocus:false
+    revalidateIfStale:false,
+    revalidateOnReconnect:false,
+    revalidateOnFocus:false
   });
-  if(error)return <div className="text-center">...Error...</div>
-  if(isLoading)return <div className="text-center">...Loading...</div>
   return (
     <>
+      {isLoading ? (<div className="text-center">...Loading...</div>): (<></>)}
+      {error ? (<div className="text-center">...Error...</div>): (<></>)}
       {features.slice(0,3).map((feature:Feature) => (
               <section key={feature.id} className={`${(feature.id)%2===0 ? "" : " mb-[46px] md:mt-20 md:mb-[46px]"} `}>
               <div className="elemental-container">

@@ -7,17 +7,21 @@ import { useRouter } from 'next/navigation';
 import {motion} from "framer-motion"
 import Image from "next/image";
 import Rating from "@/components/rating-stars/rating-stars";
+import { Review } from "@/types/reviews";
+import { getAverageRatingStars } from "@/utils/getAverageRatingStars";
 type ProductItemProps= {
   id:number,
   image:string,
   name:string,
   oldPrice:string,
   price:number,
-  sale:boolean
+  sale:boolean,
+  reviews:Review[]
 }
 
-const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) => {
+const ProductItem = ({reviews,id, image, name, oldPrice,price,sale}:ProductItemProps) => {
   const { increaseCartQuantity} = useShoppingCart()
+  
   const router = useRouter()
   return (
     <>
@@ -40,7 +44,7 @@ const ProductItem = ({id, image, name, oldPrice,price,sale}:ProductItemProps) =>
                />
              </div>
              <div className=" relative star-rating w-[129px] h-5 tracking-[10px] mx-auto text-md overflow-hidden text-yellow ">
-               <Rating value={3}/>
+               <Rating value={getAverageRatingStars(reviews)}/>
              </div>
              <h2 className="mt-3 mb-[5px] text-lg leading-[1.6] font-extrabold group-hover:text-orange group-hover:transition-all transition-all">
                {name}

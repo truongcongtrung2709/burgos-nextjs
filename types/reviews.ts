@@ -1,4 +1,5 @@
 export type Review = {
+  id:number;
   name:string,
   email:string,
   rating:number,

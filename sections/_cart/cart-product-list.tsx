@@ -6,12 +6,11 @@ import { useState } from 'react'
 
 
 import { productsURLEndpoint as cacheKey, getProducts } from '@/services/productsAPI'
-import useSWR, { preload } from "swr"
+import useSWR from "swr"
 
 import { Product } from '@/types/product'
 import CartProductItem from './cart-product-item'
 
-preload(cacheKey,getProducts) 
 
 const CartProductList = () => {
   const [search, setSearch] = useState<string>('')

@@ -6,13 +6,14 @@ import CartPaidItem from "./cart-paid-item"
 
 
 import { getProducts,productsURLEndpoint as cacheKey } from '@/services/productsAPI'
-import useSWR, {preload} from "swr"
+import useSWR from "swr"
 
 import { Product } from "@/types/product"
 
-preload(cacheKey,getProducts) 
 const CartTotal = () => {
+
 const {deleteCart,cartItems} = useShoppingCart()
+
 const {data:products,isLoading, error} = useSWR(cacheKey,getProducts, {
   revalidateIfStale:false,
   revalidateOnFocus:false,

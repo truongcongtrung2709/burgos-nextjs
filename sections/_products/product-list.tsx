@@ -1,19 +1,23 @@
 'use client'
 import ProductItem from './product-item';
 import { Product } from '@/types/product';
-import { getProducts, productsURLEndpoint as cacheKey } from '@/services/productsAPI';
-import useSWR,{preload} from "swr"
+import { productsURLEndpoint as cacheKey } from '@/services/productsAPI';
+import useSWR from "swr"
 import { _optionSoftProduct } from '@/_mock/_options-drop-down';
+import fetcher from '@/services/fetcher';
+import { useEffect, useState } from 'react';
 
-preload(cacheKey,getProducts)
 
   const Products = () => {
-    const{data:products,isLoading, error} = useSWR(cacheKey,getProducts,
+    const{data:productsData,isLoading, error,mutate}:any = useSWR(cacheKey+ "?_embed=reviews",fetcher,
       {revalidateIfStale:false,
       revalidateOnFocus:false,
       revalidateOnReconnect:false})
-
-
+    const [products, setProducts] = useState<Product[]>([])
+    useEffect(()=>{
+      mutate()
+      setProducts(productsData?.data)
+    },[productsData,mutate])
 
   return (
     <>

@@ -2,9 +2,8 @@
 import BlogItem from './blog-item'
 import { Blog } from '@/types/blog';
 import { getBlogs, blogsURLEndpoint as cacheKey } from '@/services/blogsAPI';
-import useSWR, { preload } from "swr"
+import useSWR from "swr"
 
-preload(cacheKey,getBlogs)
 const BlogList = () => {
   const {data:blogs, isLoading, error} = useSWR(cacheKey,getBlogs, {
     revalidateIfStale:false,

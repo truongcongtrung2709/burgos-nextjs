@@ -1,5 +1,3 @@
-import { Product } from "@/types/product";
-import axios from "axios";
 import fetcher from "./fetcher";
 
 

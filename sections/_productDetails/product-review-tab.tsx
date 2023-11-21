@@ -133,7 +133,7 @@ const ProductReviewsTab = ({review,productDetails} : Props) => {
           </div>
         </form>
       </div>
-    TP</div>
+    </div>
   )
 }
 

@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 import { Product } from '@/types/product'
 import { getProducts,productsURLEndpoint as cacheKey } from '@/services/productsAPI'
-import useSWR, {preload} from "swr"
-import { useEffect } from 'react'
+import useSWR from "swr"
 
-preload(cacheKey,getProducts) 
 type CartTotalProps = {
   id:number,
   quantity:number

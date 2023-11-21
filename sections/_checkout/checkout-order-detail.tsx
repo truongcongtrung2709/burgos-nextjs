@@ -13,15 +13,10 @@ import { useShoppingCart } from "@/context/ShoppingCartContext";
 import {Order} from "@/types/order"
 import { Product } from "@/types/product";
 
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { getProducts, productsURLEndpoint as productsCacheKey } from '@/services/productsAPI';
-import useSWR,{preload} from "swr"
-import { addOrder, ordersURLEndpoint as ordersCacheKey } from '@/services/ordersAPI';
-import fetcher from "@/services/fetcher"
-import { mutate } from "swr"
-import { ToastContainer, toast } from "react-toastify"
-preload(productsCacheKey,getProducts)
+import useSWR from "swr"
+import { addOrder} from '@/services/ordersAPI';
 const OrderDetails = () => {
   const router = useRouter();
   const{data:products,isLoading, error} = useSWR(productsCacheKey,getProducts,
@@ -46,14 +41,11 @@ const OrderDetails = () => {
   const onSubmit = handleSubmit((data) => {
     const total =   cartItems.reduce((total, cartItem) =>{
     const item = products?.find((i:Product) => i.id === cartItem.id)   
-      return total + (item?.price||0) * cartItem.quantity
-      },0)
-      const cartItemId = cartItems.map(cartItem=> cartItem.id)
-      data.orderProducts = products?.filter((product:Product) => cartItemId.includes(product.id))
-      
+    return total + (item?.price||0) * cartItem.quantity},0)
+    const cartItemId = cartItems.map(cartItem=> cartItem.id)
+    data.orderProducts = products?.filter((product:Product) => cartItemId.includes(product.id))
     data.subTotal = total ;
     data.total = total;
-    
     if(cartQuantity=== 0){
       alert("You dont have any items in your cart")
       router.push("/")
@@ -63,16 +55,13 @@ const OrderDetails = () => {
       alert("Your order has been sent successfully")
       deleteCart();
     }
-    
-    })
+  })
       
-
-    if(isLoading) return <div className='text-center'>...Loading...</div>
-    if(error) return <div className='text-center'>...Error...</div>
   return (
     <>
-    
     <form>
+      {isLoading?(<div className="text-center">...Loading...</div>):(<></>)}
+      {error?(<div className="text-center">...Error...</div>):(<></>)}
       <div className="coupon relative bg-[#f7f6f7] text-[#515151] w-auto mt-0 mb-[2em] mx-0 pl-[3.5em] pr-[2em] py-[1em] border-t-[3px]  border-[#fbb731] border-solid">
         <FontAwesomeIcon className="text-yellow pr-[5px]" icon={faCalendar}/>
         Have a coupon?

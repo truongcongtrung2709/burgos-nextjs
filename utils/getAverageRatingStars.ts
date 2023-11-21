@@ -1,4 +1,3 @@
-import { Review } from "@/types/reviews";
 
 export function getAverageRatingStars (reviews:any) {
   const res1Star = reviews?.filter((review:any) => review.rating.toString() === "1").length

@@ -1,12 +1,7 @@
  /* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useEffect, useState } from 'react'
-import ProductTabs from './product-tabs'
-import ProductsRelated from './products-related'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { Product } from '@/types/product';
-import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import { useParams } from 'next/navigation';
 import Rating from '@/components/rating-stars/rating-stars';
@@ -72,7 +67,7 @@ const ProductInfo = ({productDetails}:Props) => {
       </div>
 
     </div>
-    
+
     </>
   )
 }
