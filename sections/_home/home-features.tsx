@@ -12,10 +12,11 @@ const HomeFeatures = () => {
     revalidateOnReconnect:false,
     revalidateOnFocus:false
   });
+  if(error) return <div className="text-center">...Error...</div>
+  if(isLoading) return <div className="text-center">...Loading...</div>
   return (
     <>
-      {isLoading ? (<div className="text-center">...Loading...</div>): (<></>)}
-      {error ? (<div className="text-center">...Error...</div>): (<></>)}
+      
       {features.slice(0,3).map((feature:Feature) => (
               <section key={feature.id} className={`${(feature.id)%2===0 ? "" : " mb-[46px] md:mt-20 md:mb-[46px]"} `}>
               <div className="elemental-container">
