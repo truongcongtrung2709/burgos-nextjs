@@ -7,13 +7,12 @@ import { getFeatures, featuresURLEndpoint as cacheKey } from "@/services/feature
 import { Feature } from "@/types/features";
 preload(cacheKey,getFeatures);
 const HomeFeatures = () => {
-  const {data:features,error,isLoading} = useSWR(cacheKey,getFeatures,{
+  const {data:features} = useSWR(cacheKey,getFeatures,{
     revalidateIfStale:false,
     revalidateOnReconnect:false,
     revalidateOnFocus:false
   });
-  if(error) return <div className="text-center">...Error...</div>
-  if(isLoading) return <div className="text-center">...Loading...</div>
+  
   return (
     <>
       
