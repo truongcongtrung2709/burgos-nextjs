@@ -17,7 +17,7 @@ const HomeFeatures = () => {
   return (
     <>
       
-      {features.slice(0,3).map((feature:Feature) => (
+      {features.map((feature:Feature) => (
               <section key={feature.id} className={`${(feature.id)%2===0 ? "" : " mb-[46px] md:mt-20 md:mb-[46px]"} `}>
               <div className="elemental-container">
                 <motion.div
