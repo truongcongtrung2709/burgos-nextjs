@@ -1,6 +1,7 @@
 import { Product } from "./product";
 
 export type Order = {
+  id:number;
   firstName: string,
   lastName: string,
   company: string,

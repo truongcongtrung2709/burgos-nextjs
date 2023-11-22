@@ -28,7 +28,7 @@ const OrderDetails = () => {
   const{
     cartQuantity,
     cartItems,
-     deleteCart
+    deleteCart
     }= useShoppingCart();
 
   const [displayCoupon, setDisplayCoupon] = useState(false)
@@ -56,7 +56,7 @@ const OrderDetails = () => {
       console.log(data);
       addOrder(data);
       alert("Your order has been sent successfully")
-      deleteCart();
+      // deleteCart();
     }
   })
       
