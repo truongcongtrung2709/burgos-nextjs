@@ -48,6 +48,7 @@ const OrderDetails = () => {
     data.subTotal = total ;
     data.total = total;
     data.dateTime = getCurrentDateTime();
+    data.duration = "pending"
     if(cartQuantity=== 0){
       alert("You dont have any items in your cart")
       router.push("/")

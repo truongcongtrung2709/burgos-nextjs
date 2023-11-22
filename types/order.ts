@@ -17,4 +17,5 @@ export type Order = {
   orderProducts:Product[]|undefined,
   subTotal: number,
   total:number,
+  duration:string,
 }
