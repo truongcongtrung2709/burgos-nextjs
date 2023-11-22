@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { getProducts, productsURLEndpoint as productsCacheKey } from '@/services/productsAPI';
 import useSWR from "swr"
 import { addOrder} from '@/services/ordersAPI';
+import { getCurrentDateTime } from "@/utils/getCurrentDateTime"
 const OrderDetails = () => {
   const router = useRouter();
   const{data:products,isLoading, error} = useSWR(productsCacheKey,getProducts,
@@ -46,6 +47,7 @@ const OrderDetails = () => {
     data.orderProducts = products?.filter((product:Product) => cartItemId.includes(product.id))
     data.subTotal = total ;
     data.total = total;
+    data.dateTime = getCurrentDateTime();
     if(cartQuantity=== 0){
       alert("You dont have any items in your cart")
       router.push("/")

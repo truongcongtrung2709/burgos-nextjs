@@ -8,6 +8,7 @@ export type Order = {
   address: string,
   apartment: string,
   postCode: number,
+  dateTime:string,
   townCity: string,
   phone: number,
   email: string,
