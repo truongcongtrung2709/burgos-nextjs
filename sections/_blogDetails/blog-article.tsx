@@ -35,7 +35,7 @@ const BlogArticle = ({blogDetails}:Props) => {
                 <img src={blogDetails?.img} alt="" width={730} height={405} className='object-cover max-w-[730px] max-h-[405px]' />
               </div>
               <div className="post-text row pt-6">
-                <div className="post-content flex-[0_0_100%] max-w-full">
+                <div className="post-content flex-[0_0_100%] max-w-full ">
                   {!blogDetails?.content.includes("\n")? (
                     <p>{blogDetails?.content}</p>
                   ):

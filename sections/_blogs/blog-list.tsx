@@ -2,7 +2,8 @@
 import BlogItem from './blog-item'
 import { Blog } from '@/types/blog';
 import { getBlogs, blogsURLEndpoint as cacheKey } from '@/services/blogsAPI';
-import useSWR from "swr"
+import useSWR,{mutate} from "swr"
+import { useEffect } from 'react';
 
 const BlogList = () => {
   const {data:blogs, isLoading, error} = useSWR(cacheKey,getBlogs, {
@@ -10,7 +11,9 @@ const BlogList = () => {
     revalidateOnFocus:false,
     revalidateOnReconnect:false
   })
-  
+  useEffect(() => {
+    mutate(cacheKey)
+  })
   return (
     <div className="relative w-full px-[15px] lg:flex-[0_0_66.666667%] lg:max-w-[66.666667%]">
       {isLoading? (<div className='text-center'>...loading...</div>) :(<></>)}
