@@ -32,11 +32,15 @@ const BlogArticle = ({blogDetails}:Props) => {
 
               </div>
               <div className="post-img text-center">
-                <img src={blogDetails?.img} alt="" width={730} height={405} className='object-cover' />
+                <img src={blogDetails?.img} alt="" width={730} height={405} className='object-cover max-w-[730px] max-h-[405px]' />
               </div>
               <div className="post-text row pt-6">
                 <div className="post-content flex-[0_0_100%] max-w-full">
-                  <p>{blogDetails?.content.split("\n")[0]}</p>
+                  {!blogDetails?.content.includes("\n")? (
+                    <p>{blogDetails?.content}</p>
+                  ):
+                  (<>
+                   <p>{blogDetails?.content.split("\n")[0]}</p>
                   <p>{blogDetails?.content.split("\n")[1]}</p>
                   <div className="split-p flex flex-wrap md:flex-nowrap gap-[2em]">
                     <div className='basis-full grow break-words md:basis-0 '>
@@ -69,6 +73,10 @@ const BlogArticle = ({blogDetails}:Props) => {
                   <p>{blogDetails?.content.split("\n")[14]}</p>
                   <p>{blogDetails?.content.split("\n")[15]}</p>
                   <p>{blogDetails?.content.split("\n")[16]}</p>
+                  </>)
+                 
+                  }
+                  
                   
                 </div>
 
