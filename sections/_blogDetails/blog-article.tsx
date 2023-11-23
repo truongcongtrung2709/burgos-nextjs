@@ -32,7 +32,7 @@ const BlogArticle = ({blogDetails}:Props) => {
 
               </div>
               <div className="post-img text-center">
-                <img src={blogDetails?.img} alt="" width={730} height={405} className='max-w-full' />
+                <img src={blogDetails?.img} alt="" width={730} height={405} className='object-cover' />
               </div>
               <div className="post-text row pt-6">
                 <div className="post-content flex-[0_0_100%] max-w-full">
