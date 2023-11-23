@@ -56,7 +56,7 @@ const OrderDetails = () => {
       console.log(data);
       addOrder(data);
       alert("Your order has been sent successfully")
-      // deleteCart();
+      deleteCart();
     }
   })
       
