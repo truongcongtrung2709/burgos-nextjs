@@ -18,7 +18,7 @@ const BlogItem = ({id,title,dateTime,author,category,img}:BlogItemProps) => {
     <>
       <div  className="blog-img text-center">
         <Link href={`/blogs/${id}`} className='block overflow-hidden'>
-          <Image src={img} width={900} height={500} alt="" />
+          <Image src={img} width={690} height={390}  alt="" />
         </Link>
       </div>
       <div className="blog-text">
